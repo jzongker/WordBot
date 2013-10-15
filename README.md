@@ -10,4 +10,4 @@ placement and takes into account bonus multiplier spaces.  Finally it presents t
 the user clicks on a given word, it shows where that word would appear on the board.
 
 
-[Moby Word List](http://www.gutenberg.org/ebooks/3201) provided by Project Gutenberg.
+[Moby Word List](http://www.gutenberg.org/ebooks/3201) provided by Project Gutenberg.  See [http://jzongker.github.io/WordBot/](http://jzongker.github.io/WordBot/) for a live demo.
