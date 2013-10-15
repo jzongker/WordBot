@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+		<link href="gui.css" rel="stylesheet" type="text/css" >
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="bot.js"></script>
+		<script src="gui.js"></script>
+	</head>
+	<body>
+
+		<div class="row">
+			<div class="col-xs-6">
+				<div id="boardHolder"></div>
+				<h3>Hand</h3>
+				<table id="hand">
+					<tr>
+						<td><input id="h1" value="T"></td>
+						<td><input id="h2" value="G"></td>
+						<td><input id="h3" value="T"></td>
+						<td><input id="h4" value="V"></td>
+						<td><input id="h5" value="Q"></td>
+						<td><input id="h6" value="A"></td>
+						<td><input id="h7" value="N"></td>
+						<td><button class="btn btn-tiny btn-primary" onclick="updateSuggestions()">Suggest</button></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-xs-6">
+				<div id="suggestionsHolder"></div>
+			</div>
+		</div>
+	</body>
+</html>
