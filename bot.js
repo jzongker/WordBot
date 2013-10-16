@@ -19,7 +19,7 @@ function canSpell(word, handTiles, pattern)
 			{
 				if (!arrayContains(usedTiles,t))
 				{
-					if (word.substring(l,l+1).toUpperCase()==handTiles[t][0])
+					if (word.substring(l,l+1)==handTiles[t][0])
 					{
 						matchedLetter = true;
 						usedTiles.push(t);
@@ -193,11 +193,7 @@ function getWord(startX, startY, endX, endY, vertical, placedLetters, board)
 	//determine the word
 	for (var i=0;i<result.tiles.length;i++) result.word += result.tiles[i].tile[0];
 
-	var match = false;
-	for (var i=0;i<words.length;i++)
-	{
-		if (words[i].toUpperCase()==result.word.toUpperCase()) match = true;
-	}
+	var match = $.inArray(result.word.toUpperCase(), words) > -1
 	if (!match) { result.score = -1; return result; }
 
 	result.score = getWordScore(result.tiles, board);
@@ -303,7 +299,7 @@ function getPossibleWords(handTiles, pattern, startPos)
 	{
 		if (words[i].length>=minLen)													//don't check if it's not long enough
 		{
-			if (minLen==1 || words[i].substring(minLen-1,minLen).toUpperCase() == firstConnectingLetter)		//don't check if the first connecting letter doesn't match
+			if (minLen==1 || words[i].substring(minLen-1,minLen) == firstConnectingLetter)		//don't check if the first connecting letter doesn't match
 			{
 				if (canSpell(words[i], handTiles, pattern)) result[result.length] = words[i];
 			}
