@@ -21,13 +21,14 @@ getTileByLetter
 */
 
 
-function WordBot()
+function WordBot(listUrl)
 {
 	this.tiles = [
 		['A',1,9], ['B',4,2], ['C',4,2], ['D',2,5], ['E',1,13], ['F',4,2], ['G',3,3], ['H',3,4], ['I',1,8], ['J',10,1], ['K',5,1], ['L',2,4], ['M',4,2],
 		['N',2,5], ['O',1,8], ['P',4,2], ['Q',10,1], ['R',1,6], ['S',1,5], ['T',1,7], ['U',1,4], ['V',5,2], ['W',4,2], ['X',8,1], ['Y',3,2], ['Z',10,1]
 	];
 	this.words = [];
+	this.listUrl = listUrl || 'words.txt';
 	this.loadWords();
 }
 
@@ -97,7 +98,7 @@ WordBot.prototype.canSpell = function(word, handTiles, pattern)
 //Reads the word list text file and splits it into a javascript array.
 WordBot.prototype.loadWords = function()
 {
-	$.get( "words.txt", function( data ) {
+	$.get( this.listUrl, function( data ) {
 		words = data.split('\r\n');
 		if (words.length==1) words = data.split('\n');  //Github Pages strips out the CR.
 		console.log(words.length);
