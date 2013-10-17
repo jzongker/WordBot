@@ -8,27 +8,55 @@
 		<script src="gui.js"></script>
 	</head>
 	<body>
+		<div class="container">
+			<h1>Word Bot</h1>
+			<p>The purpose of this project is to demonstate how to solve word puzzles like Scrabble, Words with Friends or crosswords using Javascript.  It's no <a href="http://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)" target="_blank">Deep Blue</a>, but it should be able to beat	just about any human at Scrabble or Words with Friends.</p>
+			<div class="row">
+				<div class="col-xs-4">
+					<h3>Instructions</h3>
+					<p>To start the game, enter each of the letters you possess in your hand into the input boxes on the right side of the page and click the suggest button and it will recomment some opening plays.  Click on each one to see the recommended placement.  To get suggestions for a game in progress, enter the letters that have been played so far onto the board spaces, enter your hand and click suggest.</p>
+					<h4>Key</h4>
+					<table class="legend">
+						<tr><td class="T2W"></td><td>Double Word</td></tr>
+						<tr><td class="T3W"></td><td>Tripple Word</td></tr>
+						<tr><td class="T2L"></td><td>Double Letter</td></tr>
+						<tr><td class="T3L"></td><td>Tripple Letter</td></tr>
+						<tr><td class="TS"></td><td>Start Position</td></tr>
+					</table>
+				</div>
+				<div class="col-xs-4">
+					<h3>Board</h3>
+					<div id="boardHolder"></div>
+				</div>
+				<div class="col-xs-4">
+					<h3>Hand</h3>
+					<table id="hand">
+						<tr>
+							<td><input id="h1" value="R"></td>
+							<td><input id="h2" value="S"></td>
+							<td><input id="h3" value="T"></td>
+							<td><input id="h4" value="L"></td>
+							<td><input id="h5" value="N"></td>
+							<td><input id="h6" value="E"></td>
+							<td><input id="h7" value="A"></td>
+							<td>&nbsp;<button class="btn btn-xs btn-primary" onclick="updateSuggestions()">Suggest</button></td>
+						</tr>
+					</table>
+					<div id="suggestionsHolder"></div>
+				</div>
+			</div>
 
-		<div class="row">
-			<div class="col-xs-6">
-				<div id="boardHolder"></div>
-				<h3>Hand</h3>
-				<table id="hand">
-					<tr>
-						<td><input id="h1" value="T"></td>
-						<td><input id="h2" value="G"></td>
-						<td><input id="h3" value="T"></td>
-						<td><input id="h4" value="V"></td>
-						<td><input id="h5" value="Q"></td>
-						<td><input id="h6" value="A"></td>
-						<td><input id="h7" value="N"></td>
-						<td><button class="btn btn-tiny btn-primary" onclick="updateSuggestions()">Suggest</button></td>
-					</tr>
-				</table>
-			</div>
-			<div class="col-xs-6">
-				<div id="suggestionsHolder"></div>
-			</div>
+			<h3>How Does it Work?</h3>
+			<ul>
+				<li>The bot iterates through each space on the board and treats it as a potential starting position for words, both horizontally and vertically.</li>
+				<li>It looks at the spaces to the right of the word and below it to determine a pattern for the potential words to follow.  For example, if the space immediately to the right of the starting position is a "T" and the starting position is 4 away from the edge of the board, the pattern would be " T &nbsp;".</li>
+				<li>It then loops through a list of 113,000 valid English words to determine if any of them can be spelled using the letters the given patten, filling in any of the blanks with letters in the hand and returns a list of candidates.</li>
+				<li>It then checks all of the adjacent words formed (if any) to verify each of them are valid.</li>
+				<li>Finally it scores the primary word and each adjacent word, taking bonus spaces into consideration and returns a total score for each potential play.</li>
+				<li>The list of potential plays is sorted by total points and the top 10 picks are returned to the player.</li>
+			</ul>
+
+
 		</div>
 	</body>
 </html>
