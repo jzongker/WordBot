@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
 		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
 		<link href="gui.css" rel="stylesheet" type="text/css" >
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -50,12 +52,14 @@
 			<ul>
 				<li>The bot iterates through each space on the board and treats it as a potential starting position for words, both horizontally and vertically.</li>
 				<li>It looks at the spaces to the right of the word and below it to determine a pattern for the potential words to follow.  For example, if the space immediately to the right of the starting position is a "T" and the starting position is 4 away from the edge of the board, the pattern would be " T &nbsp;".</li>
-				<li>It then loops through a list of 113,000 valid English words to determine if any of them can be spelled using the letters the given patten, filling in any of the blanks with letters in the hand and returns a list of candidates.</li>
+				<li>It then loops through a list of 113,000 valid English words to determine if any of them can be spelled using the letters in the given pattern, filling in any of the blanks with letters in the hand and returns a list of candidates.</li>
 				<li>It then checks all of the adjacent words formed (if any) to verify each of them are valid.</li>
 				<li>Finally it scores the primary word and each adjacent word, taking bonus spaces into consideration and returns a total score for each potential play.</li>
 				<li>The list of potential plays is sorted by total points and the top 10 picks are returned to the player.</li>
 			</ul>
 
+			<h3>Download</h3>
+			<p>You can check out the source code from <a href="https://github.com/jzongker/WordBot">github.com/jzongker/WordBot</a>.
 
 		</div>
 	</body>
