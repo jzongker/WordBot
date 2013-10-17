@@ -1,8 +1,9 @@
 td {padding:0px;margin:0px;}
 #boardHolder input, #hand input { width:20px;border:1px solid #EEE; }
-#boardHolder input.T2W { background-color:#c65b50; color:#FFF; }
-#boardHolder input.T2L { background-color:#0071b9; color:#FFF; }
-#boardHolder input.T3W { background-color:#e99c3f; color:#FFF; }
-#boardHolder input.T3L { background-color:#7eae5b; color:#FFF; }
-#boardHolder input.TS { background-color:#812e52; color:#FFF; }
+.T2W { background-color:#c65b50; color:#FFF; }
+.T2L { background-color:#0071b9; color:#FFF; }
+.T3W { background-color:#e99c3f; color:#FFF; }
+.T3L { background-color:#7eae5b; color:#FFF; }
+.TS { background-color:#812e52; color:#FFF; }
+.legend TD {min-width:25px; border:4px solid #FFF;}
 

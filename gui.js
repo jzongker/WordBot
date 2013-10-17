@@ -1,4 +1,5 @@
 var suggestions = [];
+var wordBot = new WordBot();
 
 function drawBoard(spaces)
 {
@@ -44,7 +45,7 @@ function readHand()
 	for (var i=0;i<7;i++)
 	{
 		var letter = $('#h' + (i+1)).val().toUpperCase();
-		handTiles[i] = getTileByLetter(letter);
+		handTiles[i] = wordBot.getTileByLetter(letter);
 	}
 	return handTiles;
 }
@@ -74,7 +75,7 @@ function showSuggestion(idx)
 
 function updateSuggestions()
 {
-	suggestions = getSuggestions(readHand(), readBoard());
+	suggestions = wordBot.getSuggestions(readHand(), readBoard());
 	result = "<h3>Suggestions</h3>"
 	for (var i=0;i<10 && i<suggestions.length; i++) result += '<a href="javascript:showSuggestion(' + i.toString() + ');">' + suggestions[i].words[0].word + ' - ' + suggestions[i].score + '</a><br/>';
 	$('#suggestionsHolder').html(result);
@@ -82,5 +83,5 @@ function updateSuggestions()
 }
 
 $(function(){
-	drawBoard(generateEmptyBoard());
+	drawBoard(wordBot.generateEmptyBoard());
 });
