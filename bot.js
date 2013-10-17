@@ -51,7 +51,7 @@ function loadWords()
 	$.get( "words.txt", function( data ) {
 		console.log(data.length);
 		if (data.length<100000) console.log(data);
-		words = data.split('\r\n');
+		words = data.split('\n');
 		console.log(words.length);
 	});
 }
