@@ -67,7 +67,9 @@ WordBot.prototype.getTileByLetter = function(letter)
 //Determines if a word can be spelled given a pattern of placed letters and spaces and tiles in the players hand.
 WordBot.prototype.canSpell = function(word, handTiles, pattern)
 {
+	if (word.length>pattern.length) return false;
 	var usedTiles=[];
+
 	for (var l=0;l<word.length;l++)
 	{
 		var matchedLetter = false;
@@ -86,7 +88,7 @@ WordBot.prototype.canSpell = function(word, handTiles, pattern)
 				}
 			}
 		} else {
-			if (pattern.substring(l,l+1).toUpperCase()==word.substring(l,l+1).toUpperCase()) matchedLetter = true; //See if the space is already filled with the letter we need
+			if (pattern.substring(l,l+1)==word.substring(l,l+1)) matchedLetter = true; //See if the space is already filled with the letter we need
 		}
 		if (matchedLetter==false) return false;
 	}
@@ -223,7 +225,8 @@ WordBot.prototype.getWord = function(startX, startY, endX, endY, vertical, place
 
 	//determine the word
 	for (var i=0;i<result.tiles.length;i++) result.word += result.tiles[i].tile[0];
-	var match = $.inArray(result.word.toUpperCase(), words) > -1
+	//var match = $.inArray(result.word.toUpperCase(), words) > -1
+	var match = this.binaryIndexOf(result.word, words) > -1
 	if (!match) { result.score = -1; return result; } 		//Invalid word.  Set score to -1.
 	result.score = this.getWordScore(result.tiles, board);
 	return result;
@@ -277,7 +280,7 @@ WordBot.prototype.getPlacement = function(x,y,word,pattern,vertical)
 			var placeLetter = {}
 			if (vertical) { placeLetter.x = x; placeLetter.y = y + i;}
 			else { placeLetter.x = x + i; placeLetter.y = y; }
-			placeLetter.letter = word.substring(i,i+1).toUpperCase();
+			placeLetter.letter = word.substring(i,i+1);
 			result.letters[result.letters.length] = placeLetter;
 		}
 	}
@@ -338,4 +341,33 @@ WordBot.prototype.getPossibleWords = function(handTiles, pattern, startPos)
 		}
 	}
 	return result;
+}
+
+
+//Replacement for $.inArray().  Uses binary searching on the presorted array instead to improve performance.
+//Taken from example at http://oli.me.uk/2013/06/08/searching-javascript-arrays-with-a-binary-search/
+WordBot.prototype.binaryIndexOf = function(searchValue, searchArray) {
+  'use strict';
+
+  var minIndex = 0;
+  var maxIndex = searchArray.length - 1;
+  var currentIndex;
+  var currentElement;
+
+  while (minIndex <= maxIndex) {
+      currentIndex = (minIndex + maxIndex) / 2 | 0;
+      currentElement = searchArray[currentIndex];
+
+      if (currentElement < searchValue) {
+          minIndex = currentIndex + 1;
+      }
+      else if (currentElement > searchValue) {
+          maxIndex = currentIndex - 1;
+      }
+      else {
+          return currentIndex;
+      }
+  }
+
+  return -1;
 }
