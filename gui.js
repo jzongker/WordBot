@@ -33,7 +33,7 @@ function readBoard()
 			var space = $('#s' + y.toString() + '_' + x.toString());
 			var cssClass = space.attr('class');
 			if (typeof cssClass != 'undefined') cssClass = cssClass.replace(/^T/,'')
-			result[y][x] = [cssClass,space.val()];
+			result[y][x] = [cssClass,space.val().toUpperCase()];
 		}
 	}
 	return result;
@@ -79,7 +79,7 @@ function updateSuggestions()
 	result = "<h3>Suggestions</h3>"
 	for (var i=0;i<10 && i<suggestions.length; i++) result += '<a href="javascript:showSuggestion(' + i.toString() + ');">' + suggestions[i].words[0].word + ' - ' + suggestions[i].score + '</a><br/>';
 	$('#suggestionsHolder').html(result);
-	showSuggestion(0);
+	showSuggestion(0);	
 }
 
 $(function(){
