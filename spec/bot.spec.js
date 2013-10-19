@@ -4,7 +4,7 @@ describe('WordBot', function() {
 
 	describe('#getTileByLetter', function() {
 
-		describe('given a letter', function() {
+		context('given a letter', function() {
 			var result = bot.getTileByLetter('A');
 
 			it('returns an array that matches from available tiles', function() {
@@ -29,7 +29,7 @@ describe('WordBot', function() {
 	});
 	
 	describe('#getWordScore', function() {
-		describe('given the word TIM and no bonuses', function() {
+		context('given the word TIM and no bonuses', function() {
 			var tiles = [
 				{existing: false, x: 0, y: 0, tile: bot.getTileByLetter('T')},
 				{existing: false, x: 1, y: 0, tile: bot.getTileByLetter('I')},
@@ -42,7 +42,7 @@ describe('WordBot', function() {
 			});
 		});
 		
-		describe('given the word JEREMY with a 2L bonus on E and a 2W bonus on M', function() {
+		context('given the word JEREMY with a 2L bonus on E and a 2W bonus on M', function() {
 			var tiles = [
 				{existing: false, x: 1, y: 1, tile: bot.getTileByLetter('J')},
 				{existing: false, x: 2, y: 1, tile: bot.getTileByLetter('E')}, // on double letter bonus space
