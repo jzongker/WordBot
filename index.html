@@ -13,6 +13,19 @@
 		<div class="container">
 			<h1>Word Bot</h1>
 			<p>The purpose of this project is to demonstate how to solve word puzzles like Scrabble, Words with Friends or crosswords using Javascript.  It's no <a href="http://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)" target="_blank">Deep Blue</a>, but it should be able to beat	just about any human at Scrabble or Words with Friends.</p>
+
+			<table>
+				<tr>
+					<td>Game Type: </td>
+					<td>
+						<select id="gameType">
+							<option value='WWF'>Words with Friends</option>
+							<option value='Scrabble'>Scrabble</option>
+						</select>
+					</td>
+					<td> &nbsp; <button class="btn btn-xs btn-primary" onclick="resetGame()">Reset</button></td>
+			</table>
+
 			<div class="row">
 				<div class="col-xs-4">
 					<h3>Instructions</h3>
@@ -20,9 +33,9 @@
 					<h4>Key</h4>
 					<table class="legend">
 						<tr><td class="T2W"></td><td>Double Word</td></tr>
-						<tr><td class="T3W"></td><td>Tripple Word</td></tr>
+						<tr><td class="T3W"></td><td>Triple Word</td></tr>
 						<tr><td class="T2L"></td><td>Double Letter</td></tr>
-						<tr><td class="T3L"></td><td>Tripple Letter</td></tr>
+						<tr><td class="T3L"></td><td>Triple Letter</td></tr>
 						<tr><td class="TS"></td><td>Start Position</td></tr>
 					</table>
 				</div>
