@@ -83,5 +83,11 @@ function updateSuggestions()
 }
 
 $(function(){
-	drawBoard(wordBot.generateEmptyBoard());
+	resetGame();
 });
+
+function resetGame()
+{
+	if ($('#gameType').val() == 'WWF') wordBot.initWWF(); else wordBot.initScrabble();
+	drawBoard(wordBot.board);
+}

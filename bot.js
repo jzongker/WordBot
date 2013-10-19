@@ -23,10 +23,6 @@ getTileByLetter
 
 function WordBot(listUrl)
 {
-	this.tiles = [
-		['A',1,9], ['B',4,2], ['C',4,2], ['D',2,5], ['E',1,13], ['F',4,2], ['G',3,3], ['H',3,4], ['I',1,8], ['J',10,1], ['K',5,1], ['L',2,4], ['M',4,2],
-		['N',2,5], ['O',1,8], ['P',4,2], ['Q',10,1], ['R',1,6], ['S',1,5], ['T',1,7], ['U',1,4], ['V',5,2], ['W',4,2], ['X',8,1], ['Y',3,2], ['Z',10,1]
-	];
 	this.words = [];
 	this.listUrl = listUrl || 'words.txt';
 	this.loadWords();
@@ -107,9 +103,25 @@ WordBot.prototype.loadWords = function()
 	});
 }
 
-//Creates a new empty board in the WWF style
-WordBot.prototype.generateEmptyBoard = function()
+
+WordBot.prototype.initBoard = function(spaces)
 {
+	this.board=[];
+	for (var y=0;y<spaces.length;y++)
+	{
+		this.board[y] = new Array(spaces[y].length);
+		for (x=0;x<spaces[y].length;x++) this.board[y][x] = [spaces[y][x],'']; //Add empty letter
+	}
+}
+
+//Creates a new empty board in the WWF style
+WordBot.prototype.initWWF = function()
+{
+	this.tiles = [
+		['A',1,9], ['B',4,2], ['C',4,2], ['D',2,5], ['E',1,13], ['F',4,2], ['G',3,3], ['H',3,4], ['I',1,8], ['J',10,1], ['K',5,1], ['L',2,4], ['M',4,2],
+		['N',2,5], ['O',1,8], ['P',4,2], ['Q',10,1], ['R',1,6], ['S',1,5], ['T',1,7], ['U',1,4], ['V',5,2], ['W',4,2], ['X',8,1], ['Y',3,2], ['Z',10,1]
+	];
+
 	var spaces = [
 		['','','','3W','','','3L','','3L','','','3W','','',''],
 		['','','2L','','','2W','','','','2W','','','2L','',''],
@@ -127,14 +139,37 @@ WordBot.prototype.generateEmptyBoard = function()
 		['','','2L','','','2W','','','','2W','','','2L','',''],
 		['','','','3W','','','3L','','3L','','','3W','','','']
 	];
-	result=[];
-	for (var y=0;y<spaces.length;y++)
-	{
-		result[y] = new Array(spaces[y].length);
-		for (x=0;x<spaces[y].length;x++) result[y][x] = [spaces[y][x],'']; //Add empty letter
-	}
-	return result;
+	this.initBoard(spaces);
 }
+
+//Creates a new empty board in the Scrabble style
+WordBot.prototype.initScrabble = function()
+{
+	this.tiles = [
+		['A',1,9], ['B',3,2], ['C',3,2], ['D',2,4], ['E',1,12], ['F',4,2], ['G',2,3], ['H',4,2], ['I',1,9], ['J',8,1], ['K',5,1], ['L',1,4], ['M',3,2],
+		['N',1,6], ['O',1,8], ['P',3,2], ['Q',10,1], ['R',1,6], ['S',1,4], ['T',1,6], ['U',1,4], ['V',4,2], ['W',4,2], ['X',8,1], ['Y',4,2], ['Z',10,1]
+	];
+
+	var spaces = [
+		['3W','','','2L','','','','3W','','','','2L','','','3W'],
+		['','2W','','','','3L','','','','3L','','','','2W',''],
+		['','','2W','','','','2L','','2L','','','','2W','',''],
+		['2L','','','2W','','','','2L','','','','2W','','','2L'],
+		['','','','','2W','','','','','','2W','','','',''],
+		['','3L','','','','3L','','','','3L','','','','3L',''],
+		['','','2L','','','','2L','','2L','','','','2L','',''],
+		['3W','','','2L','','','','S','','','','2L','','','3W'],
+		['','','2L','','','','2L','','2L','','','','2L','',''],
+		['','3L','','','','3L','','','','3L','','','','3L',''],
+		['','','','','2W','','','','','','2W','','','',''],
+		['2L','','','2W','','','','2L','','','','2W','','','2L'],
+		['','','2W','','','','2L','','2L','','','','2W','',''],
+		['','2W','','','','3L','','','','3L','','','','2W',''],
+		['3W','','','2L','','','','3W','','','','2L','','','3W']
+	];
+	this.initBoard(spaces);
+}
+
 
 //Counts the placed letter places and bonuses to return the score from a single word created by a play.
 WordBot.prototype.getWordScore = function(tiles, board)
