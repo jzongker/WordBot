@@ -142,6 +142,18 @@ describe('WordBot', function() {
           });
         });
       });
+
+      context('given the pattern "______S"', function() {
+        var pattern = '      S';
+
+        context('given the word ANTLER', function() {
+          var word = 'ANTLER';
+
+          it('returns false', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+          });
+        });
+      });
     });
   });
 
