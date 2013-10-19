@@ -59,4 +59,90 @@ describe('WordBot', function() {
 		});
 	});
 
+  describe('#canSpell', function() {
+    context('given the letters R S T L N E A', function() {
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+
+      context('given an empty pattern', function() {
+        var pattern = '       ';
+
+        context('given the word ANTLERS', function() {
+          var word = 'ANTLERS';
+
+          it('returns true', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+          });
+        });
+
+        context('given the word ANT', function() {
+          var word = 'ANT';
+
+          it('returns true', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+          });
+        });
+
+        context('given the word ANTLERZ', function() {
+          var word = 'ANTLERZ';
+
+          it('returns false', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+          });
+        });
+      });
+
+      context('given the pattern "A______"', function() {
+        var pattern = 'A      ';
+
+        context('given the word ANTLERS', function() {
+          var word = 'ANTLERS';
+
+          it('returns true', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+          });
+        });
+      });
+
+      context('given the pattern "ANTLERS"', function() {
+        var pattern = 'ANTLERS';
+
+        context('given the word ANTLERS', function() {
+          var word = 'ANTLERS';
+
+          it('returns false', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+          });
+        });
+      });
+    });
+
+    context('given the letters S T L N E A', function() {
+      var tiles = [['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+
+      context('given an empty pattern', function() {
+        var pattern = '       ';
+
+        context('given the word ANTLERS', function() {
+          var word = 'ANTLERS';
+
+          it('returns false', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+          });
+        });
+      });
+
+      context('given the pattern "_____R_"', function() {
+        var pattern = '     R ';
+
+        context('given the word ANTLERS', function() {
+          var word = 'ANTLERS';
+
+          it('returns true', function() {
+            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+          });
+        });
+      });
+    });
+  });
+
 });
