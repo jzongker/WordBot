@@ -122,7 +122,7 @@ describe('WordBot', function() {
 
     context('given a word using some letters in hand, touching a letter on the board that is not used in the word', function() {
       var word = 'ANTLER';
-      var tiles = [['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
       var pattern = '      S';
 
       it('returns false', function() {
