@@ -60,99 +60,73 @@ describe('WordBot', function() {
 	});
 
   describe('#canSpell', function() {
-    context('given the letters R S T L N E A', function() {
+    context('given a word using all letters from hand', function() {
+      var word = 'ANTLERS';
       var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = '       ';
 
-      context('given an empty pattern', function() {
-        var pattern = '       ';
-
-        context('given the word ANTLERS', function() {
-          var word = 'ANTLERS';
-
-          it('returns true', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
-          });
-        });
-
-        context('given the word ANT', function() {
-          var word = 'ANT';
-
-          it('returns true', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
-          });
-        });
-
-        context('given the word ANTLERZ', function() {
-          var word = 'ANTLERZ';
-
-          it('returns false', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
-          });
-        });
-      });
-
-      context('given the pattern "A______"', function() {
-        var pattern = 'A      ';
-
-        context('given the word ANTLERS', function() {
-          var word = 'ANTLERS';
-
-          it('returns true', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
-          });
-        });
-      });
-
-      context('given the pattern "ANTLERS"', function() {
-        var pattern = 'ANTLERS';
-
-        context('given the word ANTLERS', function() {
-          var word = 'ANTLERS';
-
-          it('returns false', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
-          });
-        });
+      it('returns true', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(true)
       });
     });
 
-    context('given the letters S T L N E A', function() {
+    context('given a word using some letters from hand', function() {
+      var word = 'ANT';
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = '       ';
+
+      it('returns true', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+      });
+    });
+
+    context('given a word with one letter not in hand and not on board', function() {
+      var word = 'ANTLERZ';
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = '       ';
+
+      it('returns false', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+      });
+    });
+
+    context('given a word matches same as word already on board', function() {
+      var word = 'ANTLERS';
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = 'ANTLERS';
+
+      it('returns false', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(false)
+      });
+    });
+
+    context('given a word using some letters in hand and one letter on board for beginning of word', function() {
+      var word = 'ANTLERS';
+      var tiles = [['R'], ['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = 'A      ';
+
+      it('returns true', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(true)
+      });
+    });
+
+    context('given a word using some letters in hand and one letter on board for middle of word', function() {
+      var word = 'ANTLERS';
       var tiles = [['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = '     R ';
 
-      context('given an empty pattern', function() {
-        var pattern = '       ';
-
-        context('given the word ANTLERS', function() {
-          var word = 'ANTLERS';
-
-          it('returns false', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
-          });
-        });
+      it('returns true', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(true)
       });
+    });
 
-      context('given the pattern "_____R_"', function() {
-        var pattern = '     R ';
+    context('given a word using some letters in hand, touching a letter on the board that is not used in the word', function() {
+      var word = 'ANTLER';
+      var tiles = [['S'], ['T'], ['L'], ['N'], ['E'], ['A']];
+      var pattern = '      S';
 
-        context('given the word ANTLERS', function() {
-          var word = 'ANTLERS';
-
-          it('returns true', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(true)
-          });
-        });
-      });
-
-      context('given the pattern "______S"', function() {
-        var pattern = '      S';
-
-        context('given the word ANTLER', function() {
-          var word = 'ANTLER';
-
-          it('returns false', function() {
-            expect(bot.canSpell(word, tiles, pattern)).to.be(false)
-          });
-        });
+      it('returns false', function() {
+        expect(bot.canSpell(word, tiles, pattern)).to.be(false)
       });
     });
   });
