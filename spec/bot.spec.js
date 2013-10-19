@@ -38,7 +38,7 @@ describe('WordBot', function() {
 			var score = bot.getWordScore(tiles, board);
 
 			it('returns a score of 6', function() {
-				expect(score).to.eql(6);
+				expect(score).to.be(6);
 			});
 		});
 		
@@ -54,7 +54,7 @@ describe('WordBot', function() {
 			var score = bot.getWordScore(tiles, board);
 
 			it('returns a score of 42', function() {
-				expect(score).to.eql(42);
+				expect(score).to.be(42);
 			});
 		});
 	});
