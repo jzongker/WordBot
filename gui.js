@@ -41,11 +41,11 @@ function readBoard()
 
 function readHand()
 {
-	var handTiles = [7];
+	var handTiles = [];
 	for (var i=0;i<7;i++)
 	{
 		var letter = $('#h' + (i+1)).val().toUpperCase();
-		handTiles[i] = wordBot.getTileByLetter(letter);
+		if (letter!='') handTiles[handTiles.length] = wordBot.getTileByLetter(letter);
 	}
 	return handTiles;
 }
